@@ -3,6 +3,7 @@ kind: Deployment
 metadata:
 name: echobot
 spec:
+type: LoadBalancer
 replicas: 4
 strategy:
 rollingUpdate:
@@ -26,19 +27,3 @@ requests:
 cpu: 250m
 limits:
 cpu: 500m
-env:
-- name: DB_IfAny
-value: "Well_I_Dont_Have_One"
----
-apiVersion: v1
-kind: Service
-metadata:
-name: echobot
-spec:
-type: LoadBalancer
-ports:
-- port: 80
-- port: 3978
-- port: 443
-selector:
-app: echobot
